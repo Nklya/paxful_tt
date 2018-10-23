@@ -1,0 +1,23 @@
+---
+# tasks file for pgsql_ms
+- name: Show stub
+  debug:
+    msg: Installing posgresql
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Ensure postgresql packages are installed
+  apt:
+    name: "{{ item }}"
+  loop:
+    - "postgresql-{{ pgsql_version }}"
+  notify: restart postgresql
+
+- name: Start & enable postgresql
+  service:
+    name: postgresql
+    state: started
+    enabled: yes

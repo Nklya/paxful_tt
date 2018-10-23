@@ -1,0 +1,16 @@
+---
+- name: Install pgsql on master
+  hosts: dbms
+  become: true
+
+  roles:
+    - role: pgsql_ms
+      type: master
+
+- name: Install pgsql on slave
+  hosts: dbsls
+  become: true
+
+  roles:
+    - role: pgsql_ms
+      type: slave

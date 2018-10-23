@@ -1,0 +1,6 @@
+---
+# handlers file for pgsql_ms
+- name: restart postgresql
+  service:
+    name: postgresql
+    state: restarted

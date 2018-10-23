@@ -1,0 +1,3 @@
+---
+# defaults file for pgsql_ms
+pgsql_version: 9.6
