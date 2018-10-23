@@ -1,0 +1,33 @@
+# tasks file for php-fpm
+- name: Show stub
+  debug:
+    msg: Installing php-fpm
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Ensure php-fpm packages are installed
+  apt:
+    name: "{{ item }}"
+  loop:
+    - php-fpm
+    - php-pgsql
+  notify:
+    - restart php-fpm
+
+- name: Change php-fpm config
+  ini_file:
+    path: "{{ php_fpm_ini }}"
+    section: "PHP"
+    option: cgi.fix_pathinfo
+    value: "0"
+  notify:
+    - restart php-fpm
+
+- name: Start the php-fpm service
+  service:
+    name: "php{{ php_fpm_version }}-fpm"
+    state: started
+    enabled: yes

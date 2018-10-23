@@ -1,7 +1,7 @@
-nginx
+php_fpm
 =========
 
-Install & configure Nginx.
+Install & configure php-fpm.
 
 Requirements
 ------------
@@ -22,7 +22,9 @@ TODO
 ------------
 
 * Fix versions
+* Switch from default pool
 * Check configs syntax
+* Research socket VS tcp
 
 Example Playbook
 ----------------
@@ -31,7 +33,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - nginx
+         - php_fpm
 
 License
 -------

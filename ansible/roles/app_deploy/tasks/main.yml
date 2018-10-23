@@ -1,0 +1,15 @@
+---
+# tasks file for app_deploy
+
+- name: Check permissions
+  file:
+    path: /var/www/site
+    owner: "{{ app_wwwuser }}"
+    group: "{{ app_wwwuser }}"
+
+- name: Deploy index.php
+  copy:
+    src: index.php
+    dest: /var/www/site/index.php
+    owner: "{{ app_wwwuser }}"
+    group: "{{ app_wwwuser }}"

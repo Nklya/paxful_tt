@@ -1,7 +1,7 @@
-nginx
+App deploy
 =========
 
-Install & configure Nginx.
+Deploy simple php app.
 
 Requirements
 ------------
@@ -21,8 +21,7 @@ None.
 TODO
 ------------
 
-* Fix versions
-* Check configs syntax
+* deploy
 
 Example Playbook
 ----------------
@@ -31,7 +30,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - nginx
+         - app_deploy
 
 License
 -------

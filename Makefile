@@ -2,7 +2,7 @@ all:
 	@echo Use \"make vagrant\" or \"make aws\"
 
 vagrant:
-	vagrant up
+	@cd ansible && vagrant up
 
 aws:
 	@echo Not yet implemented

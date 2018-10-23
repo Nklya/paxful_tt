@@ -1,6 +1,4 @@
 # tasks file for nginx
-# TODO: Fix versions
-
 - name: Show stub
   debug:
     msg: Installing nginx
@@ -15,3 +13,32 @@
     name: "{{ item }}"
   loop:
     - nginx
+  notify: restart nginx
+
+- name: Delete default config
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Copy template
+  template:
+    src: site.j2
+    dest: /etc/nginx/sites-available/site
+  notify: reload nginx
+
+- name: Enable site
+  file:
+    src: /etc/nginx/sites-available/site
+    dest: /etc/nginx/sites-enabled/site
+    state: link
+
+- name: Create nginx_root
+  file:
+    path: "{{ nginx_site_root }}"
+    state: directory
+
+- name: Start the nginx service
+  service:
+    name: nginx
+    state: started
+    enabled: yes

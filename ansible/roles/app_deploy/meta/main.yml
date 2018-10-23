@@ -1,6 +1,6 @@
 galaxy_info:
   author: Nikolay Antsiferov
-  description: Install & configure nginx
+  description: Deploy simple php app
   company: None
 
   license: license (BSD, MIT)
@@ -13,7 +13,6 @@ galaxy_info:
         - stretch
 
   galaxy_tags:
-    - nginx
-    - http
+    - application
 
 dependencies: []

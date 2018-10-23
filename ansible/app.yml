@@ -4,5 +4,6 @@
   become: true
 
   roles:
-    - php-fpm
+    - php_fpm
     - nginx
+    - app_deploy

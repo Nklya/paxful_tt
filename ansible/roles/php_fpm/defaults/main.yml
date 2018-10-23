@@ -1,0 +1,3 @@
+# defaults file for php-fpm
+php_fpm_version: 7.0
+php_fpm_ini: "/etc/php/{{ php_fpm_version }}/fpm/php.ini"
