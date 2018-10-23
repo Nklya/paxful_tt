@@ -1,0 +1,15 @@
+---
+app:
+  hosts:
+    appserver:
+      ansible_host: 10.10.10.10
+
+dbms:
+  hosts:
+    dbmaster:
+      ansible_host: 10.10.10.22
+
+dbsls:
+  hosts:
+    dbslave:
+      ansible_host: 10.10.10.22

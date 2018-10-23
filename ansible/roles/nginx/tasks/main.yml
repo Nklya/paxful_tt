@@ -1,0 +1,17 @@
+# tasks file for nginx
+# TODO: Fix versions
+
+- name: Show stub
+  debug:
+    msg: Installing nginx
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Ensure nginx packages are installed
+  apt:
+    name: "{{ item }}"
+  loop:
+    - nginx

@@ -1,0 +1,8 @@
+---
+- name: Install + configure php-fpm & nginx
+  hosts: app
+  become: true
+
+  roles:
+    - php-fpm
+    - nginx
