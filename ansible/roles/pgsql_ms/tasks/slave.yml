@@ -1,0 +1,32 @@
+- name: Show stub
+  debug:
+    msg: Slave config
+
+- name: Stop postgresql
+  service:
+    name: postgresql
+    state: stopped
+
+- name: Clear out data directory
+  shell: rm -rf {{ pgsql_datadir }}/*
+
+- name: Restore backup from master
+  command: pg_basebackup -X stream -D {{ pgsql_datadir }} -h {{ pgsql_master }} -U {{ pgsql_user }}
+  become: yes
+  become_user: postgres
+  environment:
+    PGPASSWORD: "{{ pgsql_pass }}"
+
+- name: "Insert custom fact file"
+  copy:
+    src: pgsql.fact.true
+    dest: /etc/ansible/facts.d/pgsql.fact
+    mode: 0644
+
+- name: Create recovery.conf
+  template:
+    src: recovery.conf.j2
+    dest: "{{ pgsql_datadir }}/recovery.conf"
+    owner: postgres
+    group: postgres
+    mode: 0644

@@ -1,0 +1,5 @@
+standby_mode = 'on'
+recovery_target_timeline = 'latest'
+primary_conninfo = 'user={{ pgsql_user }} password={{ pgsql_pass }} host={{ pgsql_master }} port=5432 sslmode=prefer sslcompression=1'
+
+trigger_file='/tmp/promotedb'

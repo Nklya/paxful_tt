@@ -4,6 +4,21 @@
   debug:
     msg: Installing posgresql
 
+- name: "Create custom facts directory"
+  file:
+    path: "/etc/ansible/facts.d"
+    state: "directory"
+
+- name: "Insert custom fact file"
+  copy:
+    src: pgsql.fact.false
+    dest: /etc/ansible/facts.d/pgsql.fact
+    mode: 0644
+  when: ansible_local.pgsql is not defined
+
+- name: "Re-run setup to use custom facts"
+  setup: ~
+
 - name: Update apt cache
   apt:
     update_cache: yes
@@ -14,7 +29,23 @@
     name: "{{ item }}"
   loop:
     - "postgresql-{{ pgsql_version }}"
+    - python-psycopg2
   notify: restart postgresql
+
+- name: Apply postgresql config
+  template:
+    src: postgresql.conf.j2
+    dest: "{{ pgsql_cfgdir }}/postgresql.conf"
+  notify: restart postgresql
+
+- name: Apply pg_hba config
+  template:
+    src: pg_hba.conf.j2
+    dest: "{{ pgsql_cfgdir }}/pg_hba.conf"
+  notify: restart postgresql
+
+- include_tasks: "{{ pgsql_type }}.yml"
+  when: not ansible_local.pgsql.replication_done or pgsql_force_repl
 
 - name: Start & enable postgresql
   service:

@@ -4,12 +4,9 @@ app:
     appserver:
       ansible_host: 10.10.10.10
 
-dbms:
+db:
   hosts:
     dbmaster:
-      ansible_host: 10.10.10.22
-
-dbsls:
-  hosts:
+      ansible_host: 10.10.10.21
     dbslave:
       ansible_host: 10.10.10.22

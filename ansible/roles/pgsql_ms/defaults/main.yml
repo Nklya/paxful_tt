@@ -1,3 +1,14 @@
 ---
 # defaults file for pgsql_ms
 pgsql_version: 9.6
+pgsql_cfgdir: /etc/postgresql/{{ pgsql_version }}/main
+pgsql_datadir: /var/lib/postgresql/{{ pgsql_version }}/main
+
+pgsql_master: 10.10.10.21
+pgsql_net: 10.10.10.10/24
+
+pgsql_type: none
+pgsql_force_repl: false
+
+pgsql_user: repl
+pgsql_pass: Ly2Ka3Su1 # Re-define in Ansible-vault

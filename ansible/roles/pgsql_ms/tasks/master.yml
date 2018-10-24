@@ -1,0 +1,17 @@
+- name: Show stub
+  debug:
+    msg: Master config
+
+- name: Create replication user account
+  postgresql_user:
+    name: "{{ pgsql_user }}"
+    password: "{{ pgsql_pass }}"
+    role_attr_flags: replication
+  become: true
+  become_user: postgres
+
+- name: "Insert custom fact file"
+  copy:
+    src: pgsql.fact.true
+    dest: /etc/ansible/facts.d/pgsql.fact
+    mode: 0644
