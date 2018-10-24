@@ -5,6 +5,7 @@
 *.tfvars
 .terraform
 *.retry
+.terraform.tfstate.lock.info
 
 # Vagrant & molecule
 .vagrant/
