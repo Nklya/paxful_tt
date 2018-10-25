@@ -39,7 +39,8 @@ resource "aws_instance" "appserver" {
   }
 
   tags {
-    Name = "appserver"
+    Name   = "appserver"
+    groups = "app"
   }
 }
 
@@ -57,7 +58,8 @@ resource "aws_instance" "dbmaster" {
   }
 
   tags {
-    Name = "dbmaster"
+    Name   = "dbmaster"
+    groups = "db"
   }
 }
 
@@ -75,6 +77,7 @@ resource "aws_instance" "dbslave" {
   }
 
   tags {
-    Name = "dbslave"
+    Name   = "dbslave"
+    groups = "db"
   }
 }

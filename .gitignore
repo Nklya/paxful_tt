@@ -16,3 +16,4 @@ id_rsa*
 .molecule
 .cache
 .pytest_cache
+.vscode
