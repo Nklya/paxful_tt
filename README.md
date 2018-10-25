@@ -21,7 +21,7 @@ This automation should do:
 2. Check that you have installed:
     * Terraform (0.11)
     * Ansible (>2.4)
-    * Vagrant
+    * Vagrant + Virtualbox
     * InSpec
 3. Execute `make prepare` to generate ssh keys and terraform.tfvars
 4. Fill your AWS keys in terraform.tfvars
@@ -34,7 +34,7 @@ This automation should do:
 
 * Makefile - wrapper for all actions
 * ansible - directory with ansible code and Vagrantfile to provision instances
-* ansible/roles/app_deploy - role, which deploy php code
+* ansible/roles/app_deploy - role, which deploy php code from `file` folder
 * ansible/roles/nginx - role, which install and configure nginx
 * ansible/roles/php_fpm - role, which install and configure php-fpm
 * ansible/roles/pgsql_ms - role, which install and configure PostgreSQL and replication
@@ -67,6 +67,13 @@ This automation should do:
     └── vpc.tf
 ```
 
+## Tests
+
+1. There is `Vagrantfile` in ansible directory so you can create and provision all infrastracture locally.
+2. For role `ansible/roles/nginx` created molecule+testinfra config.
+3. In `tests/vagrant` and `tests/aws` stored InSpec test profiles.
+4. When you run `make vagrant` or `make aws`, they run after creation and provision.
+
 ## TODO (ideas to improve current solution)
 
 * Terraform:
@@ -75,3 +82,5 @@ This automation should do:
 * Ansible:
     * remove vault.key from repo
     * add tags inside roles
+    * molecule for all roles
+    * place app to separate repository
