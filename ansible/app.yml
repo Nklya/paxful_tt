@@ -6,4 +6,3 @@
   roles:
     - php_fpm
     - nginx
-    - app_deploy

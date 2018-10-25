@@ -22,12 +22,12 @@ data "aws_ami" "this" {
 
 resource "aws_key_pair" "this" {
   key_name   = "paxful_tt"
-  public_key = "${var.aws_pubkey}"
+  public_key = "${file(var.aws_pubkey)}"
 }
 
 resource "aws_instance" "appserver" {
   ami                         = "${data.aws_ami.this.id}"
-  instance_type               = "t3.nano"
+  instance_type               = "${var.aws_instance_type}"
   associate_public_ip_address = true
   key_name                    = "${aws_key_pair.this.key_name}"
   subnet_id                   = "${aws_subnet.this.id}"
@@ -45,7 +45,7 @@ resource "aws_instance" "appserver" {
 
 resource "aws_instance" "dbmaster" {
   ami                         = "${data.aws_ami.this.id}"
-  instance_type               = "t3.nano"
+  instance_type               = "${var.aws_instance_type}"
   associate_public_ip_address = true
   key_name                    = "${aws_key_pair.this.key_name}"
   subnet_id                   = "${aws_subnet.this.id}"
@@ -63,7 +63,7 @@ resource "aws_instance" "dbmaster" {
 
 resource "aws_instance" "dbslave" {
   ami                         = "${data.aws_ami.this.id}"
-  instance_type               = "t3.nano"
+  instance_type               = "${var.aws_instance_type}"
   associate_public_ip_address = true
   key_name                    = "${aws_key_pair.this.key_name}"
   subnet_id                   = "${aws_subnet.this.id}"

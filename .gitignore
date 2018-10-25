@@ -6,6 +6,8 @@
 .terraform
 *.retry
 .terraform.tfstate.lock.info
+id_rsa*
+# vault.key #Yes, I know that vault.key should be excluded
 
 # Vagrant & molecule
 .vagrant/

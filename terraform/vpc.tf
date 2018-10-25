@@ -29,16 +29,6 @@ resource "aws_route" "this" {
   gateway_id             = "${aws_internet_gateway.this.id}"
 }
 
-# resource "aws_security_group_rule" "paxful_tt" {
-#   type        = "ingress"
-#   from_port   = 0
-#   to_port     = 0
-#   protocol    = "-1"
-#   cidr_blocks = ["0.0.0.0/0"]
-
-#   security_group_id = "${aws_vpc.paxful_tt.default_security_group_id}"
-# }
-
 resource "aws_security_group" "this" {
   name = "paxful_tt_sg"
 
