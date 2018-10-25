@@ -23,9 +23,8 @@ function fibonacci($from, $to)
     }
 }
 
-foreach (fibonacci(0, htmlspecialchars($_GET["n"])) as $fib) {
+foreach (fibonacci(0, $_GET['n']) as $fib) {
     echo $fib . " ";
-
 }
 ?>
 

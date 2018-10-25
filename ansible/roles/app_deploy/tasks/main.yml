@@ -1,15 +1,16 @@
 ---
 # tasks file for app_deploy
 
+- name: Deploy site
+  synchronize:
+    owner: no
+    group: no
+    src: 'files/'
+    dest: "{{ www_site_root }}/"
+
 - name: Check permissions
   file:
     path: "{{ www_site_root }}"
     owner: "{{ app_wwwuser }}"
     group: "{{ app_wwwuser }}"
-
-- name: Deploy index.php
-  copy:
-    src: index.php
-    dest: "{{ www_site_root }}/index.php"
-    owner: "{{ app_wwwuser }}"
-    group: "{{ app_wwwuser }}"
+    recurse: yes
