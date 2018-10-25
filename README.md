@@ -22,6 +22,7 @@ This automation should do:
     * Terraform (0.11)
     * Ansible (>2.4)
     * Vagrant
+    * InSpec
 3. Execute `make prepare` to generate ssh keys and terraform.tfvars
 4. Fill your AWS keys in terraform.tfvars
 5. Execute `make aws` to create and provision infrastracture in AWS

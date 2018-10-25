@@ -7,6 +7,10 @@ prepare:
 
 vagrant:
 	@cd ansible && vagrant up
+	@inspec exec tests/vagrant/app.rb -t ssh://vagrant@10.10.10.10 -i ~/.vagrant.d/insecure_private_key
+	@inspec exec tests/vagrant/dbmaster.rb -t ssh://vagrant@10.10.10.20 -i ~/.vagrant.d/insecure_private_key
+	@inspec exec tests/vagrant/dbslave.rb -t ssh://vagrant@10.10.10.21 -i ~/.vagrant.d/insecure_private_key
+	@inspec exec tests/vagrant/ext
 
 vagrant-destroy:
 	@cd ansible && vagrant destroy -f

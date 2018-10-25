@@ -4,7 +4,7 @@ pgsql_version: 9.6
 pgsql_cfgdir: /etc/postgresql/{{ pgsql_version }}/main
 pgsql_datadir: /var/lib/postgresql/{{ pgsql_version }}/main
 
-pgsql_master: 10.10.10.21
+pgsql_master: 10.10.10.20
 pgsql_net: 10.10.10.0/24
 
 pgsql_type: none

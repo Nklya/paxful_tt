@@ -17,3 +17,4 @@ id_rsa*
 .cache
 .pytest_cache
 .vscode
+inspec.lock
