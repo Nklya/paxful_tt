@@ -4,5 +4,8 @@
   become: true
 
   roles:
-    - php_fpm
-    - nginx
+    - role: php_fpm
+      tags: php_fpm, app
+
+    - role: nginx
+      tags: nginx, app

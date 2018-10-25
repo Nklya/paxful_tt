@@ -70,5 +70,7 @@ This automation should do:
 
 * Terraform:
     * split code into modules
+    * use remote state in S3
 * Ansible:
     * remove vault.key from repo
+    * add tags inside roles
