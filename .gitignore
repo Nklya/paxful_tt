@@ -19,3 +19,4 @@ id_rsa*
 .vscode
 inspec.lock
 .DS_Store
+tests/aws/attrs.yml
