@@ -1,11 +1,10 @@
 # encoding: utf-8
 # copyright: 2018, Nikolay Antsiferov
 
-dbmaster = '10.10.10.20'
-dbslave= '10.10.10.21'
+dbmaster = attribute ('dbmaster')
+dbslave = attribute ('dbslave')
 port = 5432
 
-# you add controls here
 control 'db-1.0' do
   title 'Check db ext'
 

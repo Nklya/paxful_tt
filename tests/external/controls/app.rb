@@ -1,10 +1,9 @@
 # encoding: utf-8
 # copyright: 2018, Nikolay Antsiferov
 
-host = '10.10.10.10'
+host = attribute ('app_host')
 port = 80
 
-# you add controls here
 control 'app-1.0' do
   title 'Check application ext'
 

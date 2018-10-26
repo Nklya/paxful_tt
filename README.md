@@ -25,10 +25,10 @@ This automation should do:
     * InSpec
 3. Execute `make prepare` to generate ssh keys and terraform.tfvars
 4. Fill your AWS keys in terraform.tfvars
-5. Execute `make aws` to create and provision infrastracture in AWS
-6. Execute `make aws-stop` to delete infrastracture in AWS
-7. Execute `make vagrant` to create and provision infrastracture in Vagrant
-8. Execute `make aws-stop` to delete infrastracture in Vagrant
+5. Execute `make aws` to create and provision infrastracture in AWS + tests
+6. Execute `make aws-destroy` to delete infrastracture in AWS
+7. Execute `make vagrant` to create and provision infrastracture in Vagrant + tests
+8. Execute `make aws-destroy` to delete infrastracture in Vagrant
 
 ## Structure
 
@@ -82,5 +82,7 @@ This automation should do:
 * Ansible:
     * remove vault.key from repo
     * add tags inside roles
-    * molecule for all roles
     * place app to separate repository
+* Tests:
+    * Add inspec aws specific tests
+    * molecule for all roles
