@@ -28,7 +28,7 @@ This automation should do:
 5. Execute `make aws` to create and provision infrastracture in AWS + tests
 6. Execute `make aws-destroy` to delete infrastracture in AWS
 7. Execute `make vagrant` to create and provision infrastracture in Vagrant + tests
-8. Execute `make aws-destroy` to delete infrastracture in Vagrant
+8. Execute `make vagrant-destroy` to delete infrastracture in Vagrant
 
 ## Structure
 
