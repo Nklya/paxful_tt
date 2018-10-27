@@ -11,6 +11,14 @@
     name: "{{ item }}"
   loop:
     - rsync
+    - mailutils
+
+- name: Allow php to reload nginx
+  template:
+    src: www-data.j2
+    dest: /etc/sudoers.d/www-data
+    validate: 'visudo -cf %s'
+    mode: 0440
 
 - name: Deploy site
   synchronize:

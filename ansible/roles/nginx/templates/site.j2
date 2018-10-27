@@ -3,6 +3,7 @@ server {
     server_name    site;
     root           {{ nginx_site_root }};
     index          index.html index.php;
+    include        access_list.conf;
 
   location ~* \.php$ {
     fastcgi_pass unix:/run/php/{{php_fpm_socket}};

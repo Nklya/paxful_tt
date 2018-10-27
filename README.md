@@ -20,7 +20,7 @@ This automation should do:
 1. Clone repository
 2. Check that you have installed:
     * Terraform (0.11)
-    * Ansible (>2.4)
+    * Ansible (>2.7)
     * Vagrant + Virtualbox
     * InSpec
 3. Execute `make prepare` to generate ssh keys and terraform.tfvars

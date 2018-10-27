@@ -2,3 +2,4 @@
 # defaults file for nginx
 php_fpm_socket: php7.0-fpm.sock
 nginx_site_root: /var/www/site
+nginx_wwwuser: www-data

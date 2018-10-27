@@ -38,6 +38,15 @@
     path: "{{ nginx_site_root }}"
     state: directory
 
+- name: Touch access_list.conf
+  file:
+    path: /etc/nginx/access_list.conf
+    state: touch
+    owner: "{{ nginx_wwwuser }}"
+    group: "{{ nginx_wwwuser }}"
+    access_time: preserve
+    modification_time: preserve
+
 - name: Start the nginx service
   service:
     name: nginx
