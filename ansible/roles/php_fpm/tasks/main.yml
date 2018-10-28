@@ -1,8 +1,4 @@
 # tasks file for php-fpm
-- name: Show stub
-  debug:
-    msg: Installing php-fpm
-
 - name: Update apt cache
   apt:
     update_cache: yes

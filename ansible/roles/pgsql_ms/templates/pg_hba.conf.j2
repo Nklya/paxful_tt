@@ -8,4 +8,4 @@ host    all             all             ::1/128                 md5
 
 # Replication settings
 host    replication     {{ pgsql_user }}       {{ pgsql_net }}            md5
-host    all             {{ pgsql_user }}       {{ pgsql_net }}            md5
+host    all             all                    {{ pgsql_net }}            md5

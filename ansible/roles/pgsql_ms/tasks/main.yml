@@ -1,8 +1,8 @@
 ---
 # tasks file for pgsql_ms
-- name: Show stub
-  debug:
-    msg: Installing posgresql
+- name: Include credentials
+  include_vars:
+    file: "{{ inventory_dir }}/credentials.yml"
 
 - name: "Create custom facts directory"
   file:

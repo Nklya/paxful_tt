@@ -7,6 +7,7 @@ prepare:
 
 vagrant:
 	@cd ansible && vagrant up
+	@cd ansible && ansible-playbook site.yml
 	@inspec exec tests/app.rb -t ssh://vagrant@10.10.10.10 -i ~/.vagrant.d/insecure_private_key
 	@inspec exec tests/dbmaster.rb -t ssh://vagrant@10.10.10.20 -i ~/.vagrant.d/insecure_private_key
 	@inspec exec tests/dbslave.rb -t ssh://vagrant@10.10.10.21 -i ~/.vagrant.d/insecure_private_key

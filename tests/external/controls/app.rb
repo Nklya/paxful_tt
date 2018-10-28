@@ -16,7 +16,8 @@ control 'app-1.0' do
     its('body') { should match ('0 1 1 2 3 5 8 13') }
   end
 
-  describe http("http://#{host}/blacklisted/") do
-    its('status') { should eq 444 }
-  end
+  # This test is disabled due to enabled blocking code
+  # describe http("http://#{host}/blacklisted/") do
+  #   its('status') { should eq 444 }
+  # end
 end

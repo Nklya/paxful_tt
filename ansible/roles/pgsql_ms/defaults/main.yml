@@ -11,4 +11,4 @@ pgsql_type: none
 pgsql_force_repl: false
 
 pgsql_user: repl
-pgsql_pass: test # Set strong password in Ansible-vault encrypted vars!!!
+# pgsql_pass: test # Set strong password in Ansible-vault encrypted vars!!!

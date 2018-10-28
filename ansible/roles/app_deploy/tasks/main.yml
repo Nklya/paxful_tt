@@ -1,5 +1,8 @@
 ---
 # tasks file for app_deploy
+- name: Include credentials
+  include_vars:
+    file: "{{ inventory_dir }}/credentials.yml"
 
 - name: Update apt cache
   apt:
@@ -12,6 +15,48 @@
   loop:
     - rsync
     - mailutils
+
+- name: Create postgres user
+  postgresql_user:
+    name: "{{ app_pg_user }}"
+    password: "{{ app_pg_pass }}"
+  become: true
+  become_user: postgres
+  delegate_to: dbmaster
+
+- name: Create postgres database
+  postgresql_db:
+    name: "{{ app_pg_db }}"
+  become: true
+  become_user: postgres
+  delegate_to: dbmaster
+
+- name: Create table
+  command: psql -d access_list -c 'CREATE TABLE IF NOT EXISTS blocked (id SERIAL PRIMARY KEY, path CHAR(64), ip inet, datetime timestamp);'
+  become: true
+  become_user: postgres
+  delegate_to: dbmaster
+
+- name: Ensure access for the new user to tables
+  postgresql_privs:
+    db: "{{ app_pg_db }}"
+    role: "{{ app_pg_user }}"
+    objs: ALL_IN_SCHEMA
+    privs: SELECT,INSERT,UPDATE,DELETE
+  become: true
+  become_user: postgres
+  delegate_to: dbmaster
+
+- name: Ensure access for the new user to sequences
+  postgresql_privs:
+    db: "{{ app_pg_db }}"
+    role: "{{ app_pg_user }}"
+    objs: ALL_IN_SCHEMA
+    type: sequence
+    privs: USAGE
+  become: true
+  become_user: postgres
+  delegate_to: dbmaster
 
 - name: Allow php to reload nginx
   template:
@@ -26,6 +71,24 @@
     group: no
     src: 'files/'
     dest: "{{ www_site_root }}/"
+
+- name: Copy config
+  template:
+    src: config.inc.j2
+    dest: "{{ www_site_root }}/blacklisted/config.inc"
+    mode: 0440
+
+- name: Fix mailboxes (hacky way)
+  shell: |
+    if [[ -f /var/mail/mail && ! -L /var/mail/root ]]; then
+      rm -f /var/mail/root
+      ln -s /var/mail/mail /var/mail/root;
+    elif [[ -f /var/mail/vagrant && ! -L /var/mail/root ]]; then
+      rm -f /var/mail/root
+      ln -s /var/mail/vagrant /var/mail/root
+    fi
+  args:
+    executable: /bin/bash
 
 - name: Check permissions
   file:

@@ -34,7 +34,7 @@ This automation should do:
 
 * Makefile - wrapper for all actions
 * ansible - directory with ansible code and Vagrantfile to provision instances
-* ansible/roles/app_deploy - role, which deploy php code from `file` folder
+* ansible/roles/app_deploy - role, which deploy php code from `file` folder, setup credentials, and mail delivery
 * ansible/roles/nginx - role, which install and configure nginx
 * ansible/roles/php_fpm - role, which install and configure php-fpm
 * ansible/roles/pgsql_ms - role, which install and configure PostgreSQL and replication
@@ -74,15 +74,28 @@ This automation should do:
 3. In `tests/vagrant` and `tests/aws` stored InSpec test profiles.
 4. When you run `make vagrant` or `make aws`, they run after creation and provision.
 
+## How it works
+
+* PHP applications are stored at `ansible/roles/app_deploy/files`
+* The first one `ansible/roles/app_deploy/files/index.php` - respond to the URL like 'http://_host_/?n=x', where 'x' is number. This request returns Fibonacci ’n’ numbers starting from 0.
+* The second one `ansible/roles/app_deploy/files/blacklisted/index.php`
+  * return error code 444 to visitor
+  * block the IP of visitor (through nginx `deny` option)
+  * send an email with IP address to "root@localhost" (through local exim)
+  * insert into PostgreSQL table information: path, ip address of the visitor and datetime when he got blocked (user, password and database name can be defined in variables)
+* Ansible role `ansible/roles/app_deploy` deploys them and configure Database, e-mail and other things.
+
+P.S. To check local email, execute `mail -f /var/mail/mail` or `mail -f /var/mail/vagrant` (for Vagrant)
+
 ## TODO (ideas to improve current solution)
 
 * Terraform:
-    * split code into modules
-    * use remote state in S3
+  * split code into modules
+  * use remote state in S3
 * Ansible:
-    * remove vault.key from repo
-    * add tags inside roles
-    * place app to separate repository
+  * remove vault.key from repo
+  * add tags inside roles
+  * place app to separate repository
 * Tests:
-    * Add inspec aws specific tests
-    * molecule for all roles
+  * Add inspec aws specific tests
+  * molecule for all roles

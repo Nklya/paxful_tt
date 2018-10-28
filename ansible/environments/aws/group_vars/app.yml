@@ -1,0 +1,2 @@
+---
+app_pg_server: "{{ hostvars['dbmaster']['private']['ip'] }}"

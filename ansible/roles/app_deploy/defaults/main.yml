@@ -2,3 +2,9 @@
 # defaults file for app_deploy
 app_wwwuser: www-data
 www_site_root: /var/www/site
+app_pg_user: block_app
+# app_pg_pass: testtest
+app_pg_server: 10.10.10.20
+app_pg_db: access_list
+access_list: /etc/nginx/access_list.conf
+app_email_to: root@localhost
