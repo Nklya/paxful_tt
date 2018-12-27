@@ -1,4 +1,4 @@
-# Tesk task for Paxful
+# Tesk task
 
 ## Initial description
 
